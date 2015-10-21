@@ -54,7 +54,7 @@ if (Meteor.isServer) {
     callContext: function() {
       var future = new Future();
       var result;
-      var ID = "56269c53ce2f152f078b4567";
+      var ID = Meteor.settings.emailId;
       var ContextIO = Npm.require('contextio');
       console.log('key: ' + Meteor.settings.ctxKey);
       console.log('secret: ' + Meteor.settings.ctxSecret);
@@ -62,7 +62,7 @@ if (Meteor.isServer) {
         key: Meteor.settings.ctxKey,
         secret: Meteor.settings.ctxSecret
       });
-      ctxioClient.accounts(ID).messages().get({limit:5,include_body:1}, function (err, response) {
+      ctxioClient.accounts(ID).messages().get({limit:5,include_body:1,body_type:'text/plain'}, function (err, response) {
         if (err) {
           throw err;
         }
